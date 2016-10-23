@@ -1,11 +1,22 @@
 {
   "name": "ztype",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sergiy Kukharyev",
-  "license": "ISC"
+  "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergej-kucharev/ztype.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sergej-kucharev/ztype/issues"
+  },
+  "homepage": "https://github.com/sergej-kucharev/ztype#readme",
+  "description": ""
 }
