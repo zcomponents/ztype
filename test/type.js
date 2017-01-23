@@ -1,7 +1,7 @@
 'use strict';
 
 
-var uf = require('util').format;
+const uf = require('util').format;
 
 
 class typeOf{
