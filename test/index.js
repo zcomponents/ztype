@@ -47,7 +47,7 @@ const type = require('../');
 
 	const al = type.al;
 	assert.ok(al(Promise.resolve(), {a: a=>true, pr: pr=>true}));
-	assert.ok(al(1.2, {a: a=>true, fl: fl=>true}));
+	assert.ok(al(1.2, {a: a=>true, fl: true}));
 
 	const of = type.of;
 	assert.ok(of([], ['array']));
