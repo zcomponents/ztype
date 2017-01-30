@@ -1,8 +1,23 @@
 #!/usr/bin/env node
 'use strict';
 
-module.exports.like = require('./lib/like');
-module.exports.is = require('./lib/is');
-module.exports.as = require('./lib/as');
-module.exports.of = require('./lib/of');
-module.exports.ofs = require('./lib/ofs');
+const like = require('./lib/like');
+const is = require('./lib/is');
+const as = require('./lib/as');
+const al = require('./lib/al');
+const of = require('./lib/of');
+const ofs = require('./lib/ofs');
+
+module.exports = function(that){
+	return {
+		al: function(then){
+			return al(that, then);
+		}
+	}
+}
+module.exports.like = like;
+module.exports.is = is;
+module.exports.as = as;
+module.exports.al = al;
+module.exports.of = of;
+module.exports.ofs = ofs;
