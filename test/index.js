@@ -1,4 +1,5 @@
-'use strict'
+#!/usr/bin/env node
+'use strict';
 
 const assert = require('assert');
 const type = require('../');
@@ -34,19 +35,21 @@ const type = require('../');
 	assert.strictEqual(is(new Date()), 'date', 'is(new Date())');
 	assert.strictEqual(is(null), 'null', 'is(null)');
 	assert.strictEqual(is(1), 'number', 'is(number)');
-	assert.strictEqual(is({}, { d: false }), 'object');
-	assert.strictEqual(is(new B()), 'object: b-->a-->object');
-	assert.strictEqual(is(B), 'function: b-->a-->object');
+	assert.strictEqual(is({}), 'object');
+	assert.strictEqual(is(new B(), { j: '-->' }), 'object: b-->a-->object');
+	assert.strictEqual(is(B, { j: '-->' }), 'function: b-->a-->object');
 	assert.strictEqual(is(''), 'string', 'is("")');
 	assert.strictEqual(is(undefined), 'undefined', 'is(undefined)');
 
+	const as = type.as;
+	assert.ok(as([], null).array);
+	assert.ok(as(Promise.resolve(), null).pr);
+
 	const of = type.of;
 	assert.ok(of([], ['array']));
-	assert.ok(of([], null).array);
 	assert.ok(of([], /^Array$/i));
 	assert.ok(of([], 'array'));
 	assert.ok(of([]), 'array');
-	assert.ok(of(Promise.resolve(), null).pr);
 
 	const ofs = type.ofs;
 	assert.ok(ofs(['a', 'b', 1], ['number', 'string']));
