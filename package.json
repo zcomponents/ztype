@@ -1,9 +1,9 @@
 {
   "name": "ztype",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "main": "index.js",
   "scripts": {
-		"start": "node app.js",
+    "start": "node index.js",
     "test": "node test/index.js"
   },
   "author": "Sergiy Kukharyev",
@@ -19,5 +19,8 @@
     "url": "https://github.com/sergej-kucharev/ztype/issues"
   },
   "homepage": "https://github.com/sergej-kucharev/ztype#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "decimal.js": "^7.1.1"
+  }
 }

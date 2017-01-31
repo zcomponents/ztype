@@ -2,15 +2,19 @@
 'use strict';
 
 const assert = require('assert');
+const Decimal = require('decimal.js');
 const type = require('../');
 
 (function(){
 
 	const like = type.like;
-	assert.strictEqual(like([]), 'array', 'like([])');
-	assert.strictEqual(like(false), 'boolean', 'like(false)');
-	assert.strictEqual(like(true), 'boolean', 'like(true)');
-	assert.strictEqual(like(new Date()), 'date', 'like(new Date())');
+	assert.strictEqual(like([]), 'array', 'like(array:[])');
+	assert.strictEqual(like(false), 'boolean', 'like(boolean:false)');
+	assert.strictEqual(like(true), 'boolean', 'like(boolean:true)');
+	assert.strictEqual(like(new Date()), 'date', 'like(date:new Date())');
+	assert.strictEqual(like(Decimal(1/2)), 'object', 'like(Decimal:1/2)');
+	assert.strictEqual(like(1/3), 'number', 'like(float:1/3)');
+	assert.strictEqual(like(Math.PI), 'number', 'like(Math.PI)');
 	assert.strictEqual(like(null), 'null', 'like(null)');
 	assert.strictEqual(like(1), 'number', 'like(number)');
 	assert.strictEqual(like({}), 'object', 'like({})');
@@ -46,8 +50,8 @@ const type = require('../');
 	assert.ok(as(Promise.resolve(), null).pr);
 
 	const al = type.al;
-	assert.ok(al(Promise.resolve(), {a: a=>true, pr: pr=>true}));
-	assert.ok(al(1.2, {a: a=>true, fl: true}));
+	assert.ok(al(Promise.resolve(), { pr: pr=>true, else:(m)=>false }));
+	assert.ok(al(1.2, { fl: true, else:(m)=>false }));
 
 	const of = type.of;
 	assert.ok(of([], ['array']));
