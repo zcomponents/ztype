@@ -2,6 +2,7 @@
 'use strict';
 
 const like = require('./lib/like');
+const pl = require('./lib/pl');
 const is = require('./lib/is');
 const as = require('./lib/as');
 const al = require('./lib/al');
@@ -16,6 +17,7 @@ module.exports = function(that){
 	}
 }
 module.exports.like = like;
+module.exports.pl = pl;
 module.exports.is = is;
 module.exports.as = as;
 module.exports.al = al;
