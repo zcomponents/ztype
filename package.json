@@ -1,6 +1,6 @@
 {
   "name": "ztype",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -19,6 +19,8 @@
     "url": "https://github.com/sergej-kucharev/ztype/issues"
   },
   "homepage": "https://github.com/sergej-kucharev/ztype#readme",
-  "description": "",
-  "dependencies": {}
+  "description": "const ztype = require('ztype'); const like = ztype.like; const is = ztype.is; const as = ztype.as; const al = ztype.al; const of = ztype.of; const ofs = ztype.ofs;",
+  "dependencies": {
+    "decimal.js": "^7.1.1"
+  }
 }
