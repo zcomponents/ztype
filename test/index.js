@@ -1,107 +1,123 @@
 #!/usr/bin/env node
+
 'use strict';
 
 const assert = require('assert');
 const Decimal = require('decimal.js');
 const type = require('../');
 
-(function(){
-	// test data
-	class A {
-		constructor(){
-			this.a = 1;
-		}
-	}
-	class B extends A{
-		constructor(){
-			super();
-			this.b = 2;
-		}
-	}
+(function() {
+  // test data
+  class A {
+    constructor() {
+      this.a = 1;
+    }
+  }
+  class B extends A {
+    constructor() {
+      super();
+      this.b = 2;
+    }
+  }
 
-	//test-2 data
-	class C extends Array{
-		constructor(c){
-			c ? super(c) : super();
-		}
-	}
+  //test-2 data
+  class C extends Array {
+    constructor(c) {
+      c ? super(c) : super();
+    }
+  }
 
-	//test-3 data
-	class D extends Date{
-		constructor(d){
-			d ? super(d) : super();
-		}
-	}
+  //test-3 data
+  class D extends Date {
+    constructor(d) {
+      d ? super(d) : super();
+    }
+  }
 
-	// like
-	const like = type.like;
-	assert.strictEqual(like([]), 'array', 'like(array:[])');
-	assert.strictEqual(like(false), 'boolean', 'like(boolean:false)');
-	assert.strictEqual(like(true), 'boolean', 'like(boolean:true)');
-	assert.strictEqual(like(new Date()), 'date', 'like(date:new Date())');
-	assert.strictEqual(like(Decimal(1/2)), 'object', 'like(Decimal:1/2)');
-	assert.strictEqual(like(1/3), 'number', 'like(float:1/3)');
-	assert.strictEqual(like(Math.PI), 'number', 'like(Math.PI)');
-	assert.strictEqual(like(null), 'null', 'like(null)');
-	assert.strictEqual(like(1), 'number', 'like(number)');
-	assert.strictEqual(like({}), 'object', 'like({})');
-	assert.strictEqual(like(''), 'string', 'like("")');
-	assert.strictEqual(like(undefined), 'undefined', 'like(undefined)');
-	assert.strictEqual(like(new A()), 'object');
-	assert.strictEqual(like(new B()), 'object');
-	assert.strictEqual(like(new C(1, 2, 3)), 'array');
-	assert.strictEqual(like(new D()), 'date');
+  // like
+  const like = type.like;
+  assert.strictEqual(like([], true), 'array'); // 'like(array:[])'
+  assert.strictEqual(like([]), 'Array'); // 'like(array:[])'
+  assert.strictEqual(like(false), 'Boolean'); // 'like(boolean:false)'
+  assert.strictEqual(like(true), 'Boolean'); // 'like(boolean:true)'
+  assert.strictEqual(like(new Date()), 'Date'); // 'like(date:new Date())'
+  assert.strictEqual(like(Decimal(1 / 2)), 'Object'); // 'like(Decimal:1/2)'
+  assert.strictEqual(like(1 / 3), 'Number'); // 'like(float:1/3)'
+  assert.strictEqual(like(Math.PI), 'Number'); // 'like(Math.PI)'
+  assert.strictEqual(like(null), 'Null'); // 'like(null)'
+  assert.strictEqual(like(1), 'Number'); // 'like(number)'
+  assert.strictEqual(like({}), 'Object'); // 'like({})'
+  assert.strictEqual(like(''), 'String'); // 'like("")'
+  assert.strictEqual(like(undefined), 'Undefined'); // 'like(undefined)'
+  assert.strictEqual(like(new A()), 'Object');
+  assert.strictEqual(like(new B()), 'Object');
+  assert.strictEqual(like(new C(1, 2, 3)), 'Array');
+  assert.strictEqual(like(new D()), 'Date');
 
-	// pl
-	const pl = function(args){
-		return type.pl(args).map(function(a){
-			return a.constructor.name;
-		});
-	}
-	assert.deepEqual(pl(new A()), [ 'A', 'Object' ]);
-	assert.deepEqual(pl(new B()), [ 'B', 'A', 'Object' ]);
-	assert.deepEqual(pl(new C(1, 2, 3)), [ 'C', 'Array' ]);
-	assert.deepEqual(pl(new D()), [ 'D', 'Date' ]);
-	assert.deepEqual(pl(D), [ 'D', 'Date' ]);
-	assert.deepEqual(pl(null), [  ]);
+  // pl
+  const pl = function(args) {
+    return type.pl(args).map(function(a) {
+      return a.constructor.name;
+    });
+  }
+  assert.deepEqual(pl(1), []);
+  assert.deepEqual(pl(new Number(1)), ['Number', 'Object']);
+  assert.deepEqual(pl(new A()), ['A', 'Object']);
+  assert.deepEqual(pl(new B()), ['B', 'A', 'Object']);
+  assert.deepEqual(pl(new C(1, 2, 3)), ['C', 'Array', 'Object']);
+  assert.deepEqual(pl(new D()), ['D', 'Date', 'Object']);
+  assert.deepEqual(pl(D), ['Function', 'Function', 'Object']);
+  assert.deepEqual(pl(null), []);
 
-	// as
-	const as = type.as;
-	assert.ok(as(true).boolean);
-	assert.ok(as([]).array);
-	assert.ok(as([]).array);
-	assert.ok(as([]).array);
-	assert.ok(as(Promise.resolve()).pr);
+  // as
+  const as = type.as;
+  assert.ok(as(true).boolean);
+  assert.ok(!as(true).object);
+  assert.ok(as(new Boolean(true)).boolean);
+  assert.ok(as(new Boolean(true)).object);
+  assert.ok(as([]).array);
+  assert.ok(as([]).object);
+  assert.ok(as(Promise.resolve()).promise);
+  assert.ok(as(Promise.resolve()).object);
 
-	// is
-	const is = type.is;
-	assert.strictEqual(is([]), 'array', 'is([])');
-	assert.strictEqual(is(false), 'boolean', 'is(false)');
-	assert.strictEqual(is(true), 'boolean', 'is(true)');
-	assert.strictEqual(is(new Date()), 'date', 'is(new Date())');
-	assert.strictEqual(is(null), 'null', 'is(null)');
-	assert.strictEqual(is(1), 'number', 'is(number)');
-	assert.strictEqual(is({}), 'object');
-	assert.strictEqual(is(new B(), { j: '-->' }), 'object: b-->a-->object');
-	assert.strictEqual(is(B, { j: '-->' }), 'function: b-->a-->object');
-	assert.strictEqual(is(''), 'string', 'is("")');
-	assert.strictEqual(is(undefined), 'undefined', 'is(undefined)');
+  // al
+  const al = type.al;
+  assert.ok(al(Promise.resolve(), { pr: true, else: false }));
+  assert.ok(al(new Number(1.2), { fl: true, else: false }));
+  assert.ok(al(new Number(123), { i: true, else: false }));
+  assert.ok(al(new Decimal('1.2'), { fl: true, else: false }));
+  assert.ok(al(new Decimal('123'), { i: true, else: false }));
+  assert.ok(al(new Decimal('1234'), { n: true, else: false }));
+  assert.ok(al(Decimal('1.2'), { fl: true, else: false }));
+  assert.ok(al(Decimal('123'), { i: true, else: false }));
+  assert.ok(al(Decimal('1234'), { n: true, else: false }));
+  assert.ok(al(1.2, { fl: true, else: false }));
+  assert.ok(al(123, { i: true, else: false }));
+  assert.ok(al(1234, { n: true, else: false }));
 
-	// al
-	const al = type.al;
-	assert.ok(al(Promise.resolve(), { pr:true, else:false }));
-	assert.ok(al(new Number(1.2), { fl:true, else:false }));
-	//assert.ok(al(1.2, { fl:true, else:false }));
+  // is
+  const is = type.is;
+  assert.strictEqual(is([]), 'array', 'is([])');
+  assert.strictEqual(is(false), 'boolean', 'is(false)');
+  assert.strictEqual(is(true), 'boolean', 'is(true)');
+  assert.strictEqual(is(new Date()), 'date', 'is(new Date())');
+  assert.strictEqual(is(null), 'null', 'is(null)');
+  assert.strictEqual(is(1), 'number', 'is(number)');
+  assert.strictEqual(is({}), 'object');
+  assert.strictEqual(is(new B(), { j: '-->' }), 'object: b-->a-->object');
+  assert.strictEqual(is(B, { j: '-->' }), 'function: function-->function-->object');
+  assert.strictEqual(is(''), 'string', 'is("")');
+  assert.strictEqual(is(undefined), 'undefined', 'is(undefined)');
 
-	// of
-	const of = type.of;
-	//assert.ok(of([], ['array']));
-	//assert.ok(of([], /^Array$/i));
-	//assert.ok(of([], 'array'));
-	//assert.ok(of([]), 'array');
+  // of
+  const of = type.of;
+  //assert.ok(of([], ['array']));
+  //assert.ok(of([], /^Array$/i));
+  //assert.ok(of([], 'array'));
+  //assert.ok(of([]), 'array');
 
-	// ofs
-	const ofs = type.ofs;
-	//assert.ok(ofs(['a', 'b', 1], ['number', 'string']));
+  // ofs
+  const ofs = type.ofs;
+  //assert.ok(ofs(['a', 'b', 1], ['number', 'string']));
 
 })();
