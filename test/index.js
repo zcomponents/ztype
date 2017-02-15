@@ -97,23 +97,25 @@ const type = require('../');
 
   // is
   const is = type.is;
-  assert.strictEqual(is([]), 'array', 'is([])');
-  assert.strictEqual(is(false), 'boolean', 'is(false)');
-  assert.strictEqual(is(true), 'boolean', 'is(true)');
-  assert.strictEqual(is(new Date()), 'date', 'is(new Date())');
-  assert.strictEqual(is(null), 'null', 'is(null)');
-  assert.strictEqual(is(1), 'number', 'is(number)');
-  assert.strictEqual(is({}), 'object');
-  assert.strictEqual(is(new B(), { j: '-->' }), 'object: b-->a-->object');
-  assert.strictEqual(is(B, { j: '-->' }), 'function: function-->function-->object');
-  assert.strictEqual(is(''), 'string', 'is("")');
-  assert.strictEqual(is(undefined), 'undefined', 'is(undefined)');
+  assert.strictEqual(is([]), 'Array');
+  assert.strictEqual(is(false), 'Boolean');
+  assert.strictEqual(is(true, {l:true}), 'boolean');
+  assert.strictEqual(is(new Date()), 'Date');
+  assert.strictEqual(is(null), 'Null');
+  assert.strictEqual(is(1), 'Number');
+  assert.strictEqual(is({}), 'Object');
+  assert.strictEqual(is(new B(), { j: '-->' }), 'Object: B-->A-->Object');
+  assert.strictEqual(is(new B(), { r: 2, j: '-->' }), 'Object: B-->A');
+  assert.strictEqual(is(B, { j: '-->' }), 'Function: Function-->Function-->Object');
+  assert.strictEqual(is(B, { d: false, p: '{%s}', j: '-->' }), 'Function: {Function}-->{Object}');
+  assert.strictEqual(is(''), 'String');
+  assert.strictEqual(is(undefined), 'Undefined');
 
   // of
   const of = type.of;
-  //assert.ok(of([], ['array']));
-  //assert.ok(of([], /^Array$/i));
-  //assert.ok(of([], 'array'));
+  assert.ok(of([], ['Array']));
+  assert.ok(of([], /^Array$/i));
+  assert.ok(of([], 'Array'));
   //assert.ok(of([]), 'array');
 
   // ofs
