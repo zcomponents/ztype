@@ -13,6 +13,7 @@ const type = require('../');
       this.a = 1;
     }
   }
+
   class B extends A {
     constructor() {
       super();
@@ -24,6 +25,12 @@ const type = require('../');
   class C extends Array {
     constructor(c) {
       c ? super(c) : super();
+    }
+  }
+
+  class e extends C {
+    constructor(e) {
+      e ? super(e) : super();
     }
   }
 
@@ -104,22 +111,25 @@ const type = require('../');
   assert.strictEqual(is(null), 'Null');
   assert.strictEqual(is(1), 'Number');
   assert.strictEqual(is({}), 'Object');
-  assert.strictEqual(is(new B(), { j: '-->' }), 'Object: B-->A-->Object');
-  assert.strictEqual(is(new B(), { r: 2, j: '-->' }), 'Object: B-->A');
-  assert.strictEqual(is(B, { j: '-->' }), 'Function: Function-->Function-->Object');
-  assert.strictEqual(is(B, { d: false, p: '{%s}', j: '-->' }), 'Function: {Function}-->{Object}');
+  assert.strictEqual(is(new B(), { j: true }), 'Object: B-->A-->Object');
+  assert.strictEqual(is(new B(), { r: 2, j: true }), 'Object: B-->A');
+  assert.strictEqual(is(B, { j: true }), 'Function: Function-->Function-->Object');
+  assert.strictEqual(is(B, { d: false, p: '{%s}', j: '.' }), 'Function: {Function}.{Object}');
   assert.strictEqual(is(''), 'String');
   assert.strictEqual(is(undefined), 'Undefined');
+  assert.strictEqual(is((new e()), { j: true }), 'Array: e-->C-->Array-->Object');
+  assert.strictEqual(is((new C()), { j: true }), 'Array: C-->Array-->Object');
+  assert.strictEqual(is((new e()).__proto__, { j: true }), 'Object: C-->Array-->Object');
 
   // of
   const of = type.of;
   assert.ok(of([], ['Array']));
   assert.ok(of([], /^Array$/i));
   assert.ok(of([], 'Array'));
-  //assert.ok(of([]), 'array');
+  assert.ok(!of([]));
 
   // ofs
   const ofs = type.ofs;
-  //assert.ok(ofs(['a', 'b', 1], ['number', 'string']));
+  assert.ok(ofs(['a', 'b', 1, new e()], ['Number', 'String', 'e']));
 
 })();
