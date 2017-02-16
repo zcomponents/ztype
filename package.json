@@ -8,7 +8,7 @@
   "author": "Sergiy Kukharyev",
   "license": "ISC",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
     "test": "test"
   },
   "repository": {
