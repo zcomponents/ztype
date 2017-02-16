@@ -1,14 +1,14 @@
 {
   "name": "ztype",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "test": "node test/index.js"
   },
   "author": "Sergiy Kukharyev",
   "license": "ISC",
   "directories": {
+    "lib": "lib"
     "test": "test"
   },
   "repository": {
@@ -19,6 +19,6 @@
     "url": "https://github.com/sergej-kucharev/ztype/issues"
   },
   "homepage": "https://github.com/sergej-kucharev/ztype#readme",
-  "description": "const ztype = require('ztype'); const like = ztype.like; const is = ztype.is; const as = ztype.as; const al = ztype.al; const of = ztype.of; const ofs = ztype.ofs;",
+  "description": "",
   "dependencies": {}
 }
