@@ -4,7 +4,7 @@
 
 const assert = require('assert');
 //const Decimal = require('decimal.js'); // npm install decimal.js --save
-const type = require('../');
+const zt = require('../');
 
 (function() {
   // test data
@@ -42,28 +42,27 @@ const type = require('../');
   }
 
   // like
-  const like = type.like;
-  assert.strictEqual(like([], true), 'array'); // 'like(array:[])'
-  assert.strictEqual(like([]), 'Array'); // 'like(array:[])'
-  assert.strictEqual(like(false), 'Boolean'); // 'like(boolean:false)'
-  assert.strictEqual(like(true), 'Boolean'); // 'like(boolean:true)'
-  assert.strictEqual(like(new Date()), 'Date'); // 'like(date:new Date())'
-  //assert.strictEqual(like(Decimal(1 / 2)), 'Object'); // 'like(Decimal:1/2)'
-  assert.strictEqual(like(1 / 3), 'Number'); // 'like(float:1/3)'
-  assert.strictEqual(like(Math.PI), 'Number'); // 'like(Math.PI)'
-  assert.strictEqual(like(null), 'Null'); // 'like(null)'
-  assert.strictEqual(like(1), 'Number'); // 'like(number)'
-  assert.strictEqual(like({}), 'Object'); // 'like({})'
-  assert.strictEqual(like(''), 'String'); // 'like("")'
-  assert.strictEqual(like(undefined), 'Undefined'); // 'like(undefined)'
-  assert.strictEqual(like(new A()), 'Object');
-  assert.strictEqual(like(new B()), 'Object');
-  assert.strictEqual(like(new C(1, 2, 3)), 'Array');
-  assert.strictEqual(like(new D()), 'Date');
+  assert.strictEqual(zt.like([], true), 'array'); // 'like(array:[])'
+  assert.strictEqual(zt.like([]), 'Array'); // 'like(array:[])'
+  assert.strictEqual(zt.like(false), 'Boolean'); // 'like(boolean:false)'
+  assert.strictEqual(zt.like(true), 'Boolean'); // 'like(boolean:true)'
+  assert.strictEqual(zt.like(new Date()), 'Date'); // 'like(date:new Date())'
+  //assert.strictEqual(zt.like(Decimal(1 / 2)), 'Object'); // 'like(Decimal:1/2)'
+  assert.strictEqual(zt.like(1 / 3), 'Number'); // 'like(float:1/3)'
+  assert.strictEqual(zt.like(Math.PI), 'Number'); // 'like(Math.PI)'
+  assert.strictEqual(zt.like(null), 'Null'); // 'like(null)'
+  assert.strictEqual(zt.like(1), 'Number'); // 'like(number)'
+  assert.strictEqual(zt.like({}), 'Object'); // 'like({})'
+  assert.strictEqual(zt.like(''), 'String'); // 'like("")'
+  assert.strictEqual(zt.like(undefined), 'Undefined'); // 'like(undefined)'
+  assert.strictEqual(zt.like(new A()), 'Object');
+  assert.strictEqual(zt.like(new B()), 'Object');
+  assert.strictEqual(zt.like(new C(1, 2, 3)), 'Array');
+  assert.strictEqual(zt.like(new D()), 'Date');
 
   // pl
   const pl = function(args) {
-    return type.pl(args).map(function(a) {
+    return zt.protoList(args).map(function(a) {
       return a.constructor.name;
     });
   }
@@ -77,18 +76,17 @@ const type = require('../');
   assert.deepEqual(pl(null), []);
 
   // as
-  const as = type.as;
-  assert.ok(as(true).boolean);
-  assert.ok(!as(true).object);
-  assert.ok(as(new Boolean(true)).boolean);
-  assert.ok(as(new Boolean(true)).object);
-  assert.ok(as([]).array);
-  assert.ok(as([]).object);
-  assert.ok(as(Promise.resolve()).promise);
-  assert.ok(as(Promise.resolve()).object);
+  assert.ok(zt.as(true).boolean);
+  assert.ok(!zt.as(true).object);
+  assert.ok(zt.as(new Boolean(true)).boolean);
+  assert.ok(zt.as(new Boolean(true)).object);
+  assert.ok(zt.as([]).array);
+  assert.ok(zt.as([]).object);
+  assert.ok(zt.as(Promise.resolve()).promise);
+  assert.ok(zt.as(Promise.resolve()).object);
 
   // al
-  const al = type.al;
+  const al = zt.al;
   assert.ok(al(Promise.resolve(), { pr: true, else: false }));
   assert.ok(al(new Number(1.2), { fl: true, else: false }));
   assert.ok(al(new Number(123), { i: true, else: false }));
@@ -101,9 +99,11 @@ const type = require('../');
   assert.ok(al(1.2, { fl: true, else: false }));
   assert.ok(al(123, { i: true, else: false }));
   assert.ok(al(1234, { n: true, else: false }));
+  assert.ok(al(new A(), { cid_A: true, else: false }));
+  assert.ok(al(new B(), { cid_A: false, cid_B: true, else: false }));
 
   // is
-  const is = type.is;
+  const is = zt.is;
   assert.strictEqual(is([]), 'Array');
   assert.strictEqual(is(false), 'Boolean');
   assert.strictEqual(is(true, {l:true}), 'boolean');
@@ -122,14 +122,14 @@ const type = require('../');
   assert.strictEqual(is((new e()).__proto__, { j: true }), 'Object: C-->Array-->Object');
 
   // of
-  const of = type.of;
+  const of = zt.of;
   assert.ok(of([], ['Array']));
   assert.ok(of([], /^Array$/i));
   assert.ok(of([], 'Array'));
   assert.ok(!of([]));
 
   // ofs
-  const ofs = type.ofs;
+  const ofs = zt.ofs;
   assert.ok(ofs(['a', 'b', 1, new e()], ['Number', 'String', 'e']));
 
 })();
