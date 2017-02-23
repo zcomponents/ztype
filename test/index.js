@@ -86,50 +86,46 @@ const zt = require('../');
   assert.ok(zt.as(Promise.resolve()).object);
 
   // al
-  const al = zt.al;
-  assert.ok(al(Promise.resolve(), { pr: true, else: false }));
-  assert.ok(al(new Number(1.2), { fl: true, else: false }));
-  assert.ok(al(new Number(123), { i: true, else: false }));
-  //assert.ok(al(new Decimal('1.2'), { fl: true, else: false }));
-  //assert.ok(al(new Decimal('123'), { i: true, else: false }));
-  //assert.ok(al(new Decimal('1234'), { n: true, else: false }));
-  //assert.ok(al(Decimal('1.2'), { fl: true, else: false }));
-  //assert.ok(al(Decimal('123'), { i: true, else: false }));
-  //assert.ok(al(Decimal('1234'), { n: true, else: false }));
-  assert.ok(al(1.2, { fl: true, else: false }));
-  assert.ok(al(123, { i: true, else: false }));
-  assert.ok(al(1234, { n: true, else: false }));
-  assert.ok(al(new A(), { cid_A: true, else: false }));
-  assert.ok(al(new B(), { cid_A: false, cid_B: true, else: false }));
+  assert.ok(zt.al(Promise.resolve(), { pr: true, else: false }));
+  assert.ok(zt.al(new Number(1.2), { fl: true, else: false }));
+  assert.ok(zt.al(new Number(123), { i: true, else: false }));
+  //assert.ok(zt.al(new Decimal('1.2'), { fl: true, else: false }));
+  //assert.ok(zt.al(new Decimal('123'), { i: true, else: false }));
+  //assert.ok(zt.al(new Decimal('1234'), { n: true, else: false }));
+  //assert.ok(zt.al(Decimal('1.2'), { fl: true, else: false }));
+  //assert.ok(zt.al(Decimal('123'), { i: true, else: false }));
+  //assert.ok(zt.al(Decimal('1234'), { n: true, else: false }));
+  assert.ok(zt.al(1.2, { fl: true, else: false }));
+  assert.ok(zt.al(123, { i: true, else: false }));
+  assert.ok(zt.al(1234, { n: true, else: false }));
+  assert.ok(zt.al(new A(), { cid_A: true, else: false }));
+  assert.ok(zt.al(new B(), { cid_A: false, cid_B: true, else: false }));
 
   // is
-  const is = zt.is;
-  assert.strictEqual(is([]), 'Array');
-  assert.strictEqual(is(false), 'Boolean');
-  assert.strictEqual(is(true, {l:true}), 'boolean');
-  assert.strictEqual(is(new Date()), 'Date');
-  assert.strictEqual(is(null), 'Null');
-  assert.strictEqual(is(1), 'Number');
-  assert.strictEqual(is({}), 'Object');
-  assert.strictEqual(is(new B(), { j: true }), 'Object: B-->A-->Object');
-  assert.strictEqual(is(new B(), { r: 2, j: true }), 'Object: B-->A');
-  assert.strictEqual(is(B, { j: true }), 'Function: Function-->Function-->Object');
-  assert.strictEqual(is(B, { d: false, p: '{%s}', j: '.' }), 'Function: {Function}.{Object}');
-  assert.strictEqual(is(''), 'String');
-  assert.strictEqual(is(undefined), 'Undefined');
-  assert.strictEqual(is((new e()), { j: true }), 'Array: e-->C-->Array-->Object');
-  assert.strictEqual(is((new C()), { j: true }), 'Array: C-->Array-->Object');
-  assert.strictEqual(is((new e()).__proto__, { j: true }), 'Object: C-->Array-->Object');
+  assert.strictEqual(zt.is([]), 'Array');
+  assert.strictEqual(zt.is(false), 'Boolean');
+  assert.strictEqual(zt.is(true, {l:true}), 'boolean');
+  assert.strictEqual(zt.is(new Date()), 'Date');
+  assert.strictEqual(zt.is(null), 'Null');
+  assert.strictEqual(zt.is(1), 'Number');
+  assert.strictEqual(zt.is({}), 'Object');
+  assert.strictEqual(zt.is(new B(), { j: true }), 'Object: B-->A-->Object');
+  assert.strictEqual(zt.is(new B(), { r: 2, j: true }), 'Object: B-->A');
+  assert.strictEqual(zt.is(B, { j: true }), 'Function: Function-->Function-->Object');
+  assert.strictEqual(zt.is(B, { d: false, p: '{%s}', j: '.' }), 'Function: {Function}.{Object}');
+  assert.strictEqual(zt.is(''), 'String');
+  assert.strictEqual(zt.is(undefined), 'Undefined');
+  assert.strictEqual(zt.is((new e()), { j: true }), 'Array: e-->C-->Array-->Object');
+  assert.strictEqual(zt.is((new C()), { j: true }), 'Array: C-->Array-->Object');
+  assert.strictEqual(zt.is((new e()).__proto__, { j: true }), 'Object: C-->Array-->Object');
 
   // of
-  const of = zt.of;
-  assert.ok(of([], ['Array']));
-  assert.ok(of([], /^Array$/i));
-  assert.ok(of([], 'Array'));
-  assert.ok(!of([]));
+  assert.ok(zt.of([], ['Array']));
+  assert.ok(zt.of([], /^Array$/i));
+  assert.ok(zt.of([], 'Array'));
+  assert.ok(!zt.of([]));
 
   // ofs
-  const ofs = zt.ofs;
-  assert.ok(ofs(['a', 'b', 1, new e()], ['Number', 'String', 'e']));
+  assert.ok(zt.ofs(['a', 'b', 1, new e()], ['Number', 'String', 'e']));
 
 })();
