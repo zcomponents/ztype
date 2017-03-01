@@ -86,6 +86,10 @@ const zt = require('../');
 	assert.ok(zt.as(Promise.resolve()).object);
 
 	// al
+	assert.ok(zt.al(true, {
+		b: zt.self,
+		else: false
+	}));
 	assert.ok(zt.al(Promise.resolve(), {
 		pr: true,
 		else: false
