@@ -10,6 +10,10 @@ const ztis = require('./lib/is');
 const ztof = require('./lib/of');
 const ztofs = require('./lib/ofs');
 
+const self = function (that) {
+	return that;
+};
+
 module.exports = function (that, options) {
 	return {
 		like: function (_options) {
@@ -35,7 +39,8 @@ module.exports = function (that, options) {
 		},
 		ofs: function (name, _options) {
 			return ztofs(that, name, Object.assign({}, options, _options));
-		}
+		},
+		self: self
 	}
 };
 
@@ -54,3 +59,5 @@ module.exports.is = ztis;
 module.exports.of = ztof;
 
 module.exports.ofs = ztofs;
+
+module.exports.self = self;
