@@ -2,62 +2,69 @@
 
 'use strict';
 
-const ztlike = require('./lib/like');
-const ztprotoList = require('./lib/protoList');
-const ztas = require('./lib/as');
-const ztal = require('./lib/al');
-const ztis = require('./lib/is');
-const ztof = require('./lib/of');
-const ztofs = require('./lib/ofs');
-
-const self = function (that) {
-	return that;
-};
+const _inherit = require('./lib/inherit');
+const _like = require('./lib/like');
+const _likeAs = require('./lib/likeAs');
+const _likeAsBack = require('./lib/likeAsBack');
+const _likeIs = require('./lib/likeIs');
+const _likeOf = require('./lib/likeOf');
+const _likeOfs = require('./lib/likeOfs');
+const _self = require('./lib/self');
 
 module.exports = function (that, options) {
 	return {
+		inherit: function () {
+			return _inherit(that);
+		},
 		like: function (_options) {
-			return ztlike(that, Object.assign({}, options, _options));
+			return _like(that, Object.assign({}, options, _options));
 		},
-		pl: function () {
-			return ztprotoList(that);
+		likeAs: function (_options) {
+			return _likeAs(that, Object.assign({}, options, _options));
 		},
-		protoList: function () {
-			return ztprotoList(that);
+		likeAsBack: function (then) {
+			return _likeAsBack(that, then);
+		},
+		likeIs: function (_options) {
+			return _likeIs(that, Object.assign({}, options, _options));
+		},
+		likeOf: function (name, _options) {
+			return _likeOf(that, name, Object.assign({}, options, _options));
+		},
+		likeOfs: function (name, _options) {
+			return _likeOfs(that, name, Object.assign({}, options, _options));
+		},
+		self: function () {
+			return _self(that);
+		},
+		in: function () {
+			return _inherit(that);
 		},
 		as: function (_options) {
-			return ztas(that, Object.assign({}, options, _options));
+			return _likeAs(that, Object.assign({}, options, _options));
 		},
-		al: function (then) {
-			return ztal(that, then);
+		ab: function (then) {
+			return _likeAsBack(that, then);
 		},
 		is: function (_options) {
-			return ztis(that, Object.assign({}, options, _options));
+			return _likeIs(that, Object.assign({}, options, _options));
 		},
 		of: function (name, _options) {
-			return ztof(that, name, Object.assign({}, options, _options));
-		},
-		ofs: function (name, _options) {
-			return ztofs(that, name, Object.assign({}, options, _options));
-		},
-		self: self
+			return _likeOf(that, name, Object.assign({}, options, _options));
+		}
 	}
 };
 
-module.exports.like = ztlike;
-
-module.exports.pl = ztprotoList;
-
-module.exports.protoList = ztprotoList;
-
-module.exports.as = ztas;
-
-module.exports.al = ztal;
-
-module.exports.is = ztis;
-
-module.exports.of = ztof;
-
-module.exports.ofs = ztofs;
-
-module.exports.self = self;
+module.exports.inherit = _inherit;
+module.exports.like = _like;
+module.exports.likeAs = _likeAs;
+module.exports.likeAsBack = _likeAsBack;
+module.exports.likeIs = _likeIs;
+module.exports.likeOf = _likeOf;
+module.exports.likeOfs = _likeOfs;
+module.exports.self = _self;
+module.exports.in = _inherit;
+module.exports.as = _likeAs;
+module.exports.ab = _likeAsBack;
+module.exports.is = _likeIs;
+module.exports.of = _likeOf;
