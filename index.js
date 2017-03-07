@@ -13,8 +13,8 @@ const _self = require('./lib/self');
 
 module.exports = function (that, options) {
 	return {
-		inherit: function () {
-			return _inherit(that);
+		inherit: function (_options) {
+			return _inherit(that, Object.assign({}, options, _options));
 		},
 		like: function (_options) {
 			return _like(that, Object.assign({}, options, _options));
@@ -22,8 +22,8 @@ module.exports = function (that, options) {
 		likeAs: function (_options) {
 			return _likeAs(that, Object.assign({}, options, _options));
 		},
-		likeAsBack: function (then) {
-			return _likeAsBack(that, then);
+		likeAsBack: function (then, _options) {
+			return _likeAsBack(that, then, Object.assign({}, options, _options));
 		},
 		likeIs: function (_options) {
 			return _likeIs(that, Object.assign({}, options, _options));
@@ -37,14 +37,14 @@ module.exports = function (that, options) {
 		self: function () {
 			return _self(that);
 		},
-		in: function () {
-			return _inherit(that);
+		in: function (_options) {
+			return _inherit(that, Object.assign({}, options, _options));
 		},
 		as: function (_options) {
 			return _likeAs(that, Object.assign({}, options, _options));
 		},
-		ab: function (then) {
-			return _likeAsBack(that, then);
+		ab: function (then, _options) {
+			return _likeAsBack(that, then, Object.assign({}, options, _options));
 		},
 		is: function (_options) {
 			return _likeIs(that, Object.assign({}, options, _options));
