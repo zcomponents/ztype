@@ -176,4 +176,9 @@ const zt = require('../');
 	// likeOfs
 	assert.ok(zt.likeOfs(['a', 'b', 1, new e()], ['Number', 'String', 'e']));
 
+	// likeProperty
+	assert.strictEqual(zt.likeProperty({a:2, b:3}, ['d', 'b']), 3);
+	assert.strictEqual(zt.likeProperty({a:1, b:2}, {d:3, b:4, else:5}, 6), 6);
+	assert.strictEqual(zt.likeProperty({a:1, b:2}, {d:3, b:2, else:5}, 6), 2);
+
 })();
