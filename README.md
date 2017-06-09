@@ -3,19 +3,33 @@
 const zt = require('ztype');
 
 
+
 zt.inherit(object, protoLength) -> [proto, proto, ...]
+
 zt.like(element, nameLowerCase) -> elementName
+
 zt.likeAs(element, nameLowerCase) -> elementLikeAsObject
+
 zt.likeAsBack(element, callbackList) -> callbackItem
+
 zt.likeIs(element, options) -> elementNameIs
+
 zt.likeOf(element, name, options) -> elementIsLikeName
+
 zt.likeOfs(elements, name, options) -> elementsAreLikeName
+
 zt.self -> (argument) => argument
+
 zt.in -> zt.inherit
+
 zt.as -> zt.likeAs
+
 zt.ab -> zt.likeAsBack;
+
 zt.is -> zt.likeIs;
+
 zt.of -> zt.likeOf;
+
 
 
 
