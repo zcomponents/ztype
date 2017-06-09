@@ -3,7 +3,7 @@
 <p><strong>const zt = require('ztype');</strong></p>
 
 <p>
-<ul>
+<ul style="list-style: none;">
 <li>zt.inherit(object, protoLength) -> [proto, proto, ...]</li>
 <li>zt.like(element, nameLowerCase) -> elementName</li>
 <li>zt.likeAs(element, nameLowerCase) -> elementLikeAsObject</li>
