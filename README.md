@@ -3,11 +3,10 @@
 const zt = require('ztype');
 
 
-
-zt.inherit(object, protoLength) -> [proto, proto, ...]
-
-zt.like(element, nameLowerCase) -> elementName
-
+<ul>
+<li>zt.inherit(object, protoLength) -> [proto, proto, ...]</li>
+<li>zt.like(element, nameLowerCase) -> elementName</li>
+<ul>
 zt.likeAs(element, nameLowerCase) -> elementLikeAsObject
 
 zt.likeAsBack(element, callbackList) -> callbackItem
