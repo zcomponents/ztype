@@ -1,33 +1,24 @@
 # ztype
 
-const zt = require('ztype');
+<p><strong>const zt = require('ztype');</strong></p>
 
-
+<p>
 <ul>
 <li>zt.inherit(object, protoLength) -> [proto, proto, ...]</li>
 <li>zt.like(element, nameLowerCase) -> elementName</li>
-<ul>
-zt.likeAs(element, nameLowerCase) -> elementLikeAsObject
-
-zt.likeAsBack(element, callbackList) -> callbackItem
-
-zt.likeIs(element, options) -> elementNameIs
-
-zt.likeOf(element, name, options) -> elementIsLikeName
-
-zt.likeOfs(elements, name, options) -> elementsAreLikeName
-
-zt.self -> (argument) => argument
-
-zt.in -> zt.inherit
-
-zt.as -> zt.likeAs
-
-zt.ab -> zt.likeAsBack;
-
-zt.is -> zt.likeIs;
-
-zt.of -> zt.likeOf;
+<li>zt.likeAs(element, nameLowerCase) -> elementLikeAsObject</li>
+<li>zt.likeAsBack(element, callbackList) -> callbackItem</li>
+<li>zt.likeIs(element, options) -> elementNameIs</li>
+<li>zt.likeOf(element, name, options) -> elementIsLikeName</li>
+<li>zt.likeOfs(elements, name, options) -> elementsAreLikeName</li>
+<li>zt.self -> (argument) => argument</li>
+<li>zt.in -> zt.inherit</li>
+<li>zt.as -> zt.likeAs</li>
+<li>zt.ab -> zt.likeAsBack;</li>
+<li>zt.is -> zt.likeIs;</li>
+<li>zt.of -> zt.likeOf;</li>
+</ul>
+</p>
 
 
 
