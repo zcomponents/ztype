@@ -2,6 +2,7 @@
 
 const zt = require('ztype');
 
+
 zt.inherit(object, protoLength) -> [proto, proto, ...]
 zt.like(element, nameLowerCase) -> elementName
 zt.likeAs(element, nameLowerCase) -> elementLikeAsObject
